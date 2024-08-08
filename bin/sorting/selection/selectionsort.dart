@@ -1,17 +1,20 @@
-selection(List list) {
-  for (int i = 0; i < list.length; i++) {
+//! Selection sort
+void main() {
+  List<int> list = [4,5,2,34,4,6,23,3,45,4235,345];
+
+  for(var i=0;i<list.length - 1;i++) {
     int min = i;
-    for (int j = 0; j < list.length; j++) {
-      if (list[min] > list[j]) {
+
+    for(var j=i+1;j<list.length;j++) {
+      if(list[j] < list[min]) {
         min = j;
       }
     }
     int temp = list[min];
     list[min] = list[i];
     list[i] = temp;
-  }
-}
 
-void main() {
- print (selection([1, 2, 3, 4, 0, -7]));
+  }
+
+  print(list);
 }
