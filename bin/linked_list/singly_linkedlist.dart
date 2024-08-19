@@ -38,7 +38,7 @@ class LinkedList {
     prev?.next = temp?.next;
   }
 
-    // ! displaying a node (getting)
+  // ! displaying a node (getting)
   void displayNode() {
     Node? temp = head;
     if (temp == null) {
@@ -74,7 +74,7 @@ class LinkedList {
         found = true;
         newValue.next = temp.next;
         temp.next = newValue;
-        break;  
+        break;
       }
       temp = temp.next;
     }
@@ -118,18 +118,17 @@ class LinkedList {
 
   //! Merge List
   void mergeList(LinkedList otherList) {
-    if(head == null) {
+    if (head == null) {
       head = otherList.head;
     } else {
       Node temp = head!;
 
-      while(temp.next != null) {
+      while (temp.next != null) {
         temp = temp.next!;
       }
       temp.next = otherList.head;
     }
   }
-
 }
 
 void main() {
@@ -171,5 +170,4 @@ void main() {
   linkedList2.mergeList(linkedList3);
 
   linkedList2.displayNode();
-
 }
