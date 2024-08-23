@@ -72,9 +72,11 @@ class BinarySearchTree {
 
   void removerHelper(int data, Node? currentNode, Node? parentNode) {
     while (currentNode != null) {
+      // traverses through the left tree
       if (data < currentNode.data) {
         parentNode = currentNode;
         currentNode = currentNode.left;
+        // traverses through the right tree
       } else if (data > currentNode.data) {
         parentNode = currentNode;
         currentNode = currentNode.right;
@@ -87,7 +89,7 @@ class BinarySearchTree {
         } else {
           // removes if parent node is null
           if (parentNode == null) {
-            if (currentNode.right == null) {
+            if (currentNode.right == null) { 
               root = currentNode.left;
             } else {
               root = currentNode.right;
@@ -122,6 +124,48 @@ class BinarySearchTree {
       return getMinValueHelper(currentNode?.left);
     }
   }
+
+
+  //! INORDER TRAVERSAL
+  void inOrder() {
+    inOrderHelper(root);
+  }
+
+  void inOrderHelper(Node? node) {
+    if (node != null) {
+      inOrderHelper(node.left);
+      print(node.data);
+      inOrderHelper(node.right);
+    }
+  }
+
+
+  //! PREORDER TRAVERSAL
+  void preOrder() {
+    preOrderHelper(root);
+  }
+
+  void preOrderHelper(Node? node) {
+    if(node != null) {
+      print(node.data);
+      preOrderHelper(node.left);
+      preOrderHelper(node.right);
+    }
+  }
+
+
+  //! POSTORDER TRAVERSAL
+  void postOrder() {
+    postOrderHelper(root);
+  }
+
+  void postOrderHelper(Node? node) {
+    if(node != null) {
+      postOrderHelper(node.left);
+      postOrderHelper(node.right);
+      print(node.data);
+    }
+  }
 }
 
 //! RUNNNNNNNNXXXXXXX
@@ -131,8 +175,14 @@ void main() {
 
   tree.insertNode(10);
   tree.insertNode(5);
+  tree.insertNode(3);
+  tree.insertNode(4);
 
-  tree.remove(5);
+  tree.inOrder();
+  print('\n');
+  tree.preOrder();
+  print('\n');
+  tree.postOrder();
 
-  print(tree.checkContains(5));
+  
 }
