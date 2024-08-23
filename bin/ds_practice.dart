@@ -1,66 +1,67 @@
-// This class represents a Max-Heap implementation.
-class Heaper {
-  // This method is responsible for building the heap and then sorting the array.
-  void insert(List<int> arr) {
-    int n = arr.length;
-    
-    // Step 1: Build the heap.
-    // Start from the last non-leaf node and heapify each node.
-    for (var i = (n ~/ 2) - 1; i >= 0; i--) {
-      heapfyup(arr, n, i);
-    }
+class Heap {
+  List<int> heap = [];
 
-    // Step 2: Sort the array using heap sort.
-    // Extract elements from the heap one by one, placing them at the end of the array.
-    for (var i = n - 1; i >= 0; i--) {
-      // Swap the root (largest element) with the last element.
-      int temp = arr[0];
-      arr[0] = arr[i];
-      arr[i] = temp;
-      
-      // Heapify the reduced heap to maintain the heap property.
-      heapfyup(arr, i, 0);
-    }
+  int parent(int index) => (index - 1) ~/ 2;
+  int leftChild(int index) => 2 * index + 1;
+  int rightChild(int index) => 2 * index + 2;
+
+  void swap(int i, int j) {
+    int temp = heap[i];
+    heap[i] = heap[j];
+    heap[j] = temp;
   }
 
-  // This method is responsible for maintaining the heap property.
-  // It ensures the largest element is at the root in the subtree rooted at index `i`.
-  void heapfyup(List<int> arr, int n, int i) {
-    int largest = i;  // Assume the root is the largest.
-    int left = 2 * largest + 1;  // Left child index.
-    int right = 2 * largest + 2; // Right child index.
-
-    // If the left child exists and is greater than the current largest, update largest.
-    if (left < n && arr[left] > arr[largest]) {
-      largest = left;
-    }
-    // If the right child exists and is greater than the current largest, update largest.
-    if (right < n && arr[right] > arr[largest]) {
-      largest = right;
-    }
-
-    // If the largest element is not the root, swap them and continue heapifying.
-    if (largest != i) {
-      int temp = arr[i];
-      arr[i] = arr[largest];
-      arr[largest] = temp;
-      
-      // Recursively heapify the affected subtree.
-      heapfyup(arr, n, largest);
-    }
+  void printHeap() {
+    print(heap);
   }
 }
 
-void main() {
-  // Create an instance of the heaper class.
-  Heaper he = Heaper();
+class MinHeap extends Heap {
+  void build(List<int> arr) {
+    heap = arr;
+    for (int i = parent(heap.length - 1); i >= 0; i--) {
+      heapifyDown(i);
+    }
+  }
 
-  // Define an array to be heapified and sorted.
-  List<int> arr = [10, 11, 12, 6, 5, 7];
-  
-  // Call the insert method to sort the array using heap sort.
-  he.insert(arr);
-  
-  // Print the sorted array.
-  print(arr);
+  void insert(int value) {
+    heap.add(value);
+    heapifyUp(heap.length - 1);
+  }
+
+  int remove() {
+    if (heap.isEmpty) {
+      throw Exception('Heap is empty');
+    }
+    int root = heap[0];
+    heap[0] = heap.removeLast();
+    heapifyDown(0);
+    return root;
+  }
+
+  void heapifyUp(int index) {
+    while (index > 0 && heap[index] < heap[parent(index)]) {
+      swap(index, parent(index));
+      index = parent(index);
+    }
+  }
+
+  void heapifyDown(int index) {
+    int smallest = index;
+    int left = leftChild(index);
+    int right = rightChild(index);
+
+    if (left < heap.length && heap[left] < heap[smallest]) {
+      smallest = left;
+    }
+
+    if (right < heap.length && heap[right] < heap[smallest]) {
+      smallest = right;
+    }
+
+    if (smallest != index) {
+      swap(index, smallest);
+      heapifyDown(smallest);
+    }
+  }
 }
