@@ -29,7 +29,7 @@ class Heap {
 class MinHeap extends Heap {
   // Function to build the heap from an unsorted array.
   void build(List<int> arr) {
-    heap = arr; // Initialize heap with the array elements.
+    heap = arr;
     // Heapify all non-leaf nodes starting from the last parent node.
     for (int i = parent(heap.length - 1); i >= 0; i--) {
       heapifyDown(i);
@@ -55,7 +55,7 @@ class MinHeap extends Heap {
 
   // Function to maintain the heap property by moving an element up.
   void heapifyUp(int index) {
-    // Move the element up until the heap property is satisfied.
+    // Move the element up until the heap property is satisfied.a
     while (index > 0 && heap[index] < heap[parent(index)]) {
       swap(index, parent(index)); // Swap with the parent if the element is smaller.
       index = parent(index); // Move to the parent index.
