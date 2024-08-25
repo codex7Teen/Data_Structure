@@ -41,8 +41,7 @@ class MaxHeap extends Heap {
   // Function to insert a new element into the heap.
   void insert(int value) {
     heap.add(value); // Add the new element to the end of the heap.
-    heapifyUp(heap.length -
-        1); // Ensure the heap property is maintained by moving the element up.
+    heapifyUp(heap.length - 1); // Ensure the heap property is maintained by moving the element up.
   }
 
   // Function to remove and return the largest element (root) from the heap.
@@ -51,8 +50,7 @@ class MaxHeap extends Heap {
       throw Exception('Heap is empty'); // Handle empty heap case.
     }
     int root = heap[0]; // Get the root element (largest in max heap).
-    heap[0] =
-        heap.removeLast(); // Replace root with the last element in the heap.
+    heap[0] = heap.removeLast(); // Replace root with the last element in the heap.
     heapifyDown(0); // Restore heap property by moving the new root down.
     return root; // Return the removed root element.
   }
@@ -60,10 +58,7 @@ class MaxHeap extends Heap {
   // Function to restore the heap property by moving the element up.
   void heapifyUp(int index) {
     while (index > 0 && heap[index] > heap[parent(index)]) {
-      swap(
-          index,
-          parent(
-              index)); // Swap if the current element is greater than its parent.
+      swap(index, parent(index)); // Swap if the current element is greater than its parent.
       index = parent(index); // Move to the parent index.
     }
   }
@@ -94,8 +89,7 @@ class MaxHeap extends Heap {
 
 void main() {
   MaxHeap maxHeap = MaxHeap();
-  maxHeap
-      .build([5, 3, 8, 4, 1, 2]); // Build the max heap from the initial array.
+  maxHeap.build([5, 3, 8, 4, 1, 2]); // Build the max heap from the initial array.
   maxHeap.printHeap(); // Should print the heap in max-heap order.
 
   maxHeap.insert(10); // Insert the value 10 into the max heap.
