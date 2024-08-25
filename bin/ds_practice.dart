@@ -1,59 +1,160 @@
-class TrieNode {
-  Map<String, TrieNode> character = {};
-  bool endOfCharacter = false;
+class Node {
+  int data;
+  Node? left;
+  Node? right;
+  Node(this.data);
 }
 
-class Trie {
-  TrieNode root = TrieNode();
+class BinarySearchTree {
 
-//! insert
-  void insert(String word) {
-    TrieNode? temp = root;
+  Node? root;
 
-    for(var i=0;i<word.length;i++) {
-      var char = word[i];
-      temp?.character.putIfAbsent(char, () => TrieNode());
-      temp = temp?.character[char];
+//! insert node
+  void insertNode(int data) {
+    Node? currentNode = root;
+    Node newNode = Node(data);
+
+    if(currentNode == null) {
+      root = newNode;
+      return;
     }
-    temp?.endOfCharacter = true;
+
+    while(true) {
+      if(newNode.data < currentNode!.data) {
+        if(currentNode.left == null) {
+          currentNode.left = newNode;
+          break;
+        } else {
+          currentNode = currentNode.left;
+        }
+      } else {
+        if(currentNode.right == null) {
+          currentNode.right = newNode;
+          break;
+        } else {
+          currentNode = currentNode.right;
+        }
+      }
+    }
   }
 
-//! search 
-bool search(String word) {
-  TrieNode? temp = root;
+  
+//! check contains
+bool contains(int data) {
+  Node? currentNode = root;
 
-  for(var char in word.split('')) {
-    if(!temp!.character.containsKey(char)) {
-      return false;
+  while(currentNode != null) {
+    if(data < currentNode.data) {
+      currentNode = currentNode.left;
+    } else if(data > currentNode.data) {
+      currentNode = currentNode.right;
+    } else {
+      return true;
     }
-    temp = temp.character[char];
-  } 
-  return temp?.endOfCharacter ?? false;
-} 
-
-//! check preffix
-bool checkPrefix(String prefix) {
-  TrieNode? temp = root;
-
-  for(var char in prefix.split('')) {
-    if (!temp!.character.containsKey(char)) {
-      return false;
-    }
-    temp = temp.character[char];
   }
-  return true;
+  return false;
 }
 
-//! delete 
-
-
+void deleteNode(int data) {
+  deleteHelper(data, root, null);
 }
+
+void deleteHelper(int data, Node? currentNode, Node? parentNode) {
+
+  while(currentNode != null) {
+    if(data < currentNode.data) {
+      parentNode = currentNode;
+      currentNode = currentNode.left;
+    } else if (data > currentNode.data) {
+      parentNode = currentNode;
+      currentNode = currentNode.right;
+    } else {
+      if(currentNode.left != null && currentNode.right != null) {
+        currentNode.data = getMinValueHelper(currentNode.right);
+        deleteHelper(currentNode.data, currentNode.right, currentNode);
+      } else {
+        if(parentNode == null) {
+          if(currentNode.right == null) {
+            root = currentNode.left;
+          } else {
+            root = currentNode.right;
+          }
+        } else {
+          if(parentNode.left == currentNode) {
+            if(currentNode.right == null) {
+              parentNode.left = currentNode.left;
+            } else {
+              parentNode.left = currentNode.right;
+            }
+          } else {
+            if(currentNode.right == null) {
+              parentNode.right = currentNode.left;
+            } else {
+              parentNode.right = currentNode.right;
+            }
+          }
+        }
+      }
+      break;
+    }
+  }
+}
+
+int getMinValueHelper(Node? currentNode) {
+  if(currentNode!.left == null) {
+    return currentNode.data;
+  } else {
+    return getMinValueHelper(currentNode.left);
+  }
+}
+
+//! inorder
+
+void inorder() {
+  inOrderHelper(root);
+}
+
+void inOrderHelper(Node? node) {
+  if(node != null) {
+  inOrderHelper(node.left);
+  print(node.data);
+  inOrderHelper(node.right);
+  }
+}
+
+void preOrder() {
+  preOrderHelper(root);
+}
+
+void preOrderHelper(Node? node) {
+  if(node != null) {
+    print(node.data);
+    preOrderHelper(node.left);
+    preOrderHelper(node.right);
+  }
+}
+
+  void postOrder() {
+    postOrderHelper(root);
+  }
+
+  void postOrderHelper(Node? node) {
+    if(node != null) {
+      postOrderHelper(node.left);
+      postOrderHelper(node.right);
+      print(node.data);
+    }
+  }
+}
+
 
 void main() {
-  Trie trie = Trie();
-  
-  trie.insert('dennis');
-  trie.insert('abisek');
+  BinarySearchTree tree = BinarySearchTree();
 
+  tree.insertNode(10);
+  tree.insertNode(30);
+  tree.insertNode(5);
+
+  
   
 }

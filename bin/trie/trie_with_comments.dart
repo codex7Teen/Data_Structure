@@ -84,7 +84,7 @@ class Trie {
       // If the word isn't marked as an end, return false (word not found).
       if (!node.isEndOfWord) {
         return false;
-      }
+      } 
       // Unmark the end of the word.
       node.isEndOfWord = false;
       

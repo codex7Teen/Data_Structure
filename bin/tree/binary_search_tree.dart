@@ -10,7 +10,6 @@ class BinarySearchTree {
   Node? root;
 
 
-
   //! INSERT NODE IN TREE
   void insertNode(int data) {
     Node? newNode = Node(data);
@@ -166,6 +165,27 @@ class BinarySearchTree {
       print(node.data);
     }
   }
+
+
+
+
+  //! FIND LEAVES OF THE TREE
+  void findLeaves() {
+    findLeavesHelper(root);
+  }
+
+  void findLeavesHelper(Node? node) {
+    if (node != null) {
+      // If the node has no children, it's a leaf
+      if (node.left == null && node.right == null) {
+        print(node.data);
+      }
+      findLeavesHelper(node.left);
+      findLeavesHelper(node.right);
+    }
+  }
+
+
 }
 
 //! RUNNNNNNNNXXXXXXX
@@ -175,14 +195,15 @@ void main() {
 
   tree.insertNode(10);
   tree.insertNode(5);
-  tree.insertNode(3);
-  tree.insertNode(4);
+  tree.insertNode(15);
 
-  tree.inOrder();
-  print('\n');
-  tree.preOrder();
-  print('\n');
-  tree.postOrder();
+  // tree.inOrder();
+  // print('\n');
+  // tree.preOrder();
+  // print('\n');
+  // tree.postOrder();
+
+  tree.findLeaves();
 
   
 }
