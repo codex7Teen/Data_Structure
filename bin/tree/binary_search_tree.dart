@@ -9,7 +9,6 @@ class Node {
 class BinarySearchTree {
   Node? root;
 
-
   //! INSERT NODE IN TREE
   void insertNode(int data) {
     Node? newNode = Node(data);

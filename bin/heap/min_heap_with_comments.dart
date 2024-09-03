@@ -60,8 +60,7 @@ class MinHeap extends Heap {
   void heapifyUp(int index) {
     // Move the element up until the heap property is satisfied.a
     while (index > 0 && heap[index] < heap[parent(index)]) {
-      swap(index,
-          parent(index)); // Swap with the parent if the element is smaller.
+      swap(index, parent(index)); // Swap with the parent if the element is smaller.
       index = parent(index); // Move to the parent index.
     }
   }
