@@ -39,8 +39,7 @@ class MinHeap extends Heap {
   // Function to insert a new element into the heap.
   void insert(int value) {
     heap.add(value); // Add the new element to the end of the heap.
-    heapifyUp(heap.length -
-        1); // Ensure the heap property is maintained by moving the element up.
+    heapifyUp(heap.length - 1); // Ensure the heap property is maintained by moving the element up.
   }
 
   // Function to remove and return the smallest element (root) from the heap.
@@ -49,10 +48,8 @@ class MinHeap extends Heap {
       throw Exception('Heap is empty'); // Handle empty heap case.
     }
     int root = heap[0]; // Store the root element to return it later.
-    heap[0] = heap
-        .removeLast(); // Replace root with the last element and remove the last element.
-    heapifyDown(
-        0); // Ensure the heap property is maintained by moving the new root down.
+    heap[0] = heap.removeLast(); // Replace root with the last element and remove the last element.
+    heapifyDown(0); // Ensure the heap property is maintained by moving the new root down.
     return root; // Return the smallest element.
   }
 
