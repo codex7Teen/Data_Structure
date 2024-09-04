@@ -11,7 +11,7 @@ class Trie {
   // The root node of the Trie, initialized as an empty Trinode.
   Trinode? root = Trinode();
 
-  // Insert a word into the Trie
+  //! Insert a word into the Trie
   void insert(String word) {
     // Start from the root node.
     Trinode? temp = root;
@@ -30,7 +30,7 @@ class Trie {
     temp?.isEndOfWord = true;
   }
 
-  // Search for a word in the Trie
+  //! Search for a word in the Trie
   bool search(String word) {
     // Start from the root node.
     Trinode? temp = root;
@@ -48,7 +48,7 @@ class Trie {
     return temp?.isEndOfWord ?? false;
   }
 
-  // Check if any word in the Trie starts with the given prefix
+  //! Check if any word in the Trie starts with the given prefix
   bool startsWith(String prefix) {
     // Start from the root node.
     Trinode? temp = root;
@@ -66,7 +66,7 @@ class Trie {
     return true;
   }
 
-  // Delete a word from the Trie
+  //! Delete a word from the Trie
   bool delete(String word) {
     // Call the helper function to delete the word, starting from the root and the first character.
     return _deleteHelper(root, word, 0);

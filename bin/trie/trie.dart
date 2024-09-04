@@ -6,7 +6,7 @@ class Trinode {
 class Trie {
   Trinode? root = Trinode();
 
-  // Insert a word into the Trie
+  //! Insert a word into the Trie
   void insert(String word) {
     Trinode? temp = root;
 
@@ -18,7 +18,7 @@ class Trie {
     temp?.isEndOfWord = true;
   }
 
-  // Search for a word in the Trie
+  //! Search for a word in the Trie
   bool search(String word) {
     Trinode? temp = root;
     for (var char in word.split('')) {
@@ -30,7 +30,7 @@ class Trie {
     return temp?.isEndOfWord ?? false;
   }
 
-  // Check if any word in the Trie starts with the given prefix
+  //! Check if any word in the Trie starts with the given prefix
   bool startsWith(String prefix) {
     Trinode? temp = root;
     for (var char in prefix.split('')) {
@@ -42,7 +42,7 @@ class Trie {
     return true;
   }
 
-  // Delete a word from the Trie
+  //! Delete a word from the Trie
   bool delete(String word) {
     return _deleteHelper(root, word, 0);
   }
@@ -82,9 +82,9 @@ void main() {
   trie.insert('apple');
   trie.insert('app');
   print(trie.search('apple')); // true
-  print(trie.search('app'));   // true
+  print(trie.search('app')); // true
   print(trie.startsWith('app')); // true
   trie.delete('apple');
   print(trie.search('apple')); // false
-  print(trie.search('app'));   // true
+  print(trie.search('app')); // true
 }
