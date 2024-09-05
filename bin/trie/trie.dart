@@ -65,7 +65,7 @@ class Trie {
     if (!node.character.containsKey(char)) {
       return false;
     }
-
+ 
     bool shouldDeleteChild = _deleteHelper(node.character[char], word, index + 1);
 
     if (shouldDeleteChild) {
