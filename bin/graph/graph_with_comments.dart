@@ -62,7 +62,7 @@ class Graph {
       // Start the DFS traversal using a helper method.
       dfshelper(vertex, visited);
       // Print all visited vertices in the order they were discovered.
-      print(visited.toList());
+      print(visited);
     }
   }
 
@@ -96,5 +96,5 @@ void main() {
   grap.insert(10, 18);
   grap.insert(17, 19);
   grap.insert(17, 20);
-  grap.bfs(10);
+  grap.dfs(10);
 }

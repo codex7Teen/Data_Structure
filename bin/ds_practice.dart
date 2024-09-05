@@ -1,41 +1,54 @@
 class Graph {
-  
+
   Map<int, List<int>> graph = {};
 
-  //! insert
-  void insertInGraph(int vertex, int edges, [bool isbidirectional = false]) {
+  void insert(int vertex, int edge, [isbidirectional = false]) {
 
     if(!graph.containsKey(vertex)) {
       graph[vertex] = [];
     }
 
-    if(!graph.containsKey(edges)) {
-      graph[edges] = [];
+    if(!graph.containsKey(edge)) {
+      graph[edge] = [];
     }
 
-    graph[vertex]!.add(edges);
+    graph[vertex]!.add(edge);
 
     if(isbidirectional) {
-      graph[edges]!.add(vertex);
+      graph[edge]!.add(vertex);
     }
   }
 
-  //! print graph
 
-  void printGraph() {
-    graph.forEach((key, value) {
-      print('${key}, ${value}');
-    });
+  void bfs(int vertex) {
+    Set<int> visited = {};
+
+    List<int> queue = [];
+
+    visited.add(vertex);
+    queue.add(vertex);
+
+    while(queue.isNotEmpty) {
+
+      int current = queue.removeAt(0);
+
+      for(var i in graph[current]!) {
+        if(!visited.contains(i)) {
+          visited.add(i);
+          queue.add(i);
+        }
+      }
+    }
+    print(visited);
   }
 }
 
 void main() {
   Graph graph = Graph();
 
-  graph.insertInGraph(10, 25);
-  graph.insertInGraph(20, 30);
-  graph.insertInGraph(25, 50, true);
+  graph.insert(10, 34);
+  graph.insert(10, 20);
+  graph.insert(20, 53);
 
-  graph.printGraph(); 
-
+  graph.bfs(10);
 }
