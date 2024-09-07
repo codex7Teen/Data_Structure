@@ -40,7 +40,7 @@ class Graph {
     if (graph.containsKey(vertex)) {
       Set<int> visited = {};
       dfshelper(vertex, visited);
-      print(visited.toList());
+      print(visited);
     }
   }
 
