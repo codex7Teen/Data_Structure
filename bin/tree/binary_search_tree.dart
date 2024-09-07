@@ -38,10 +38,6 @@ class BinarySearchTree {
     }
   }
 
-
-
-
-
   //! CHECK CONTAINS IN TREE
   bool checkContains(int data) {
     Node? currentNode = root;
@@ -57,11 +53,6 @@ class BinarySearchTree {
     }
     return false;
   }
-
-
-
-
-
 
   //! DELETE NODE IN TREE
   void remove(int data) {
@@ -87,7 +78,7 @@ class BinarySearchTree {
         } else {
           // removes if parent node is null
           if (parentNode == null) {
-            if (currentNode.right == null) { 
+            if (currentNode.right == null) {
               root = currentNode.left;
             } else {
               root = currentNode.right;
@@ -101,7 +92,7 @@ class BinarySearchTree {
                 parentNode.left = currentNode.right;
               }
             } else {
-              // removes if the right node is only present 
+              // removes if the right node is only present
               if (currentNode.right == null) {
                 parentNode.right = currentNode.left;
               } else {
@@ -109,7 +100,7 @@ class BinarySearchTree {
               }
             }
           }
-        } 
+        }
         break;
       }
     }
@@ -122,7 +113,6 @@ class BinarySearchTree {
       return getMinValueHelper(currentNode?.left);
     }
   }
-
 
   //! INORDER TRAVERSAL
   void inOrder() {
@@ -137,20 +127,18 @@ class BinarySearchTree {
     }
   }
 
-
   //! PREORDER TRAVERSAL
   void preOrder() {
     preOrderHelper(root);
   }
 
   void preOrderHelper(Node? node) {
-    if(node != null) {
+    if (node != null) {
       print(node.data);
       preOrderHelper(node.left);
       preOrderHelper(node.right);
     }
   }
-
 
   //! POSTORDER TRAVERSAL
   void postOrder() {
@@ -158,15 +146,12 @@ class BinarySearchTree {
   }
 
   void postOrderHelper(Node? node) {
-    if(node != null) {
+    if (node != null) {
       postOrderHelper(node.left);
       postOrderHelper(node.right);
       print(node.data);
     }
   }
-
-
-
 
   //! FIND LEAVES OF THE TREE
   void findLeaves() {
@@ -184,7 +169,31 @@ class BinarySearchTree {
     }
   }
 
+  //! Check bst or not
+  bool isBst() {
+    List<int> values = [];
 
+    inOrderHelperx(root, values);
+
+    for (var i = 1; i < values.length; i++) {
+      if (values[i] <= values[i - 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void inOrderHelperx(Node? node, List<int> values) {
+    if (node == null) {
+      return;
+    }
+
+    inOrderHelperx(node.left, values);
+    values.add(node.data);
+    inOrderHelperx(node.right, values);
+  }
+
+  
 }
 
 //! RUNNNNNNNNXXXXXXX
@@ -202,6 +211,5 @@ void main() {
   // print('\n');
   // tree.postOrder();
 
-  tree.findLeaves();
-  
+  tree.isBst();
 }
