@@ -51,7 +51,7 @@ class LinkedList {
     }
   }
 
-  // to get mid
+  //! Find mid node
   void getMid() {
     Node? fast = head;
     Node? slow = head;
