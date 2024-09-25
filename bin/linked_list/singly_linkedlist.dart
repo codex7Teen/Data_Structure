@@ -63,26 +63,25 @@ class LinkedList {
     print(slow?.data);
   }
 
-  //! inserting a node after a node
-  void insertNodeAfter(int after, int data) {
-    Node newValue = Node(data);
-    Node? temp = head;
-    bool found = false;
 
-    while (temp != null) {
-      if (temp.data == after) {
-        found = true;
-        newValue.next = temp.next;
-        temp.next = newValue;
-        break;
-      }
+  //! inserting a node after a node
+  void insertNodeAfter(int data, int after) {
+    Node newNode = Node(data);
+    Node? temp = head;
+
+    while(temp != null && temp.data != after) {
       temp = temp.next;
     }
 
-    if (!found) {
-      print('The node to insert after is not found!');
+    if(temp == null) {
+      print('the after value is not found');
     }
+    
+    newNode.next = temp!.next;
+    temp.next = newNode;
   }
+
+  
 
   //! inserting a node before a node
   void insertNodeBefore(int before, int data) {
