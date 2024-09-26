@@ -30,9 +30,7 @@ class DoublyLinkedList {
 
     if (temp != null && temp.data == data) {
       head = temp.next;
-      if (head != null) {
-        head!.prev = null;
-      }
+      head!.prev = null;
       return;
     }
 
