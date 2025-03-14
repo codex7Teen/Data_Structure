@@ -10,12 +10,12 @@ class Stack {
   //! display stack
   void displayStack() {
     Node? temp = top;
-    if(top ==  null) {
+    if (top == null) {
       print('stack is empty');
       return;
     }
 
-    while(temp != null) {
+    while (temp != null) {
       print(temp.data);
       temp = temp.next;
     }
@@ -26,7 +26,7 @@ class Stack {
     Node newNode = Node(data);
     Node? temp = top;
 
-    if(temp == null) {
+    if (temp == null) {
       top = newNode;
     } else {
       newNode.next = top;
@@ -34,9 +34,8 @@ class Stack {
     }
   }
 
-  //! pop 
+  //! pop
   void popStack() {
-
     if (top == null) {
       print('stack is empty nothing to pop');
       return;
@@ -50,15 +49,13 @@ class Stack {
     Node? slow = top;
     Node? prev;
 
-    while(fast!.next != null) {
+    while (fast!.next != null) {
       fast = fast.next!.next;
       prev = slow;
       slow = slow!.next;
     }
     prev!.next = slow!.next;
-    
   }
-
 }
 
 void main() {
