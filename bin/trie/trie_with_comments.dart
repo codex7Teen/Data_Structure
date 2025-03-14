@@ -84,10 +84,10 @@ class Trie {
       // If the word isn't marked as an end, return false (word not found).
       if (!node.isEndOfWord) {
         return false;
-      } 
+      }
       // Unmark the end of the word.
       node.isEndOfWord = false;
-      
+
       // If the node has no children, return true (indicating this node can be deleted).
       return node.character.isEmpty;
     }
@@ -101,7 +101,8 @@ class Trie {
     }
 
     // Recursively delete the word in the Trie.
-    bool shouldDeleteChild = _deleteHelper(node.character[char], word, index + 1);
+    bool shouldDeleteChild =
+        _deleteHelper(node.character[char], word, index + 1);
 
     // If the child should be deleted, remove it from the current node's map.
     if (shouldDeleteChild) {
@@ -126,7 +127,7 @@ void main() {
 
   // Search for words in the Trie.
   print(trie.search('apple')); // true
-  print(trie.search('app'));   // true
+  print(trie.search('app')); // true
 
   // Check if any word starts with the given prefix.
   print(trie.startsWith('app')); // true
@@ -136,5 +137,5 @@ void main() {
 
   // Search for the word again to verify deletion.
   print(trie.search('apple')); // false
-  print(trie.search('app'));   // true
+  print(trie.search('app')); // true
 }

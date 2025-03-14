@@ -76,7 +76,7 @@ class BinarySearchTree {
           currentNode.data = getMinValueHelper(currentNode.right);
           removerHelper(currentNode.data, currentNode.right, currentNode);
         } else {
-          // removes if parent node is null
+          // Case: The node to be deleted is the root node
           if (parentNode == null) {
             if (currentNode.right == null) {
               root = currentNode.left;
@@ -84,7 +84,7 @@ class BinarySearchTree {
               root = currentNode.right;
             }
           } else {
-            // removes if the left node is only present
+            // If the node to be deleted is a left child of its parent
             if (parentNode.left == currentNode) {
               if (currentNode.right == null) {
                 parentNode.left = currentNode.left;
@@ -92,7 +92,7 @@ class BinarySearchTree {
                 parentNode.left = currentNode.right;
               }
             } else {
-              // removes if the right node is only present
+              // If the node to be deleted is a right child of its parent
               if (currentNode.right == null) {
                 parentNode.right = currentNode.left;
               } else {
@@ -192,8 +192,6 @@ class BinarySearchTree {
     values.add(node.data);
     inOrderHelperx(node.right, values);
   }
-
-  
 }
 
 //! RUNNNNNNNNXXXXXXX
@@ -205,11 +203,13 @@ void main() {
   tree.insertNode(5);
   tree.insertNode(15);
 
+  print(tree.checkContains(100));
+
   // tree.inOrder();
   // print('\n');
   // tree.preOrder();
   // print('\n');
   // tree.postOrder();
 
-  tree.isBst();
+  // tree.isBst();
 }

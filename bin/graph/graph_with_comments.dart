@@ -96,5 +96,6 @@ void main() {
   grap.insert(10, 18);
   grap.insert(17, 19);
   grap.insert(17, 20);
-  grap.dfs(10);
+  // grap.dfs(10);
+  grap.bfs(10);
 }

@@ -47,7 +47,7 @@ class DoublyLinkedList {
       temp.next!.prev = temp.prev;
     }
 
-    if(temp.prev != null) {
+    if (temp.prev != null) {
       temp.prev!.next = temp.next;
     }
   }
@@ -112,14 +112,12 @@ class DoublyLinkedList {
 
   //! merge linked list
   void mergeLists(DoublyLinkedList newlist) {
-
     Node? temp = head;
-    
-    if(head == null) {
+
+    if (head == null) {
       head = newlist.head;
     } else {
-
-      while(temp?.next != null) {
+      while (temp?.next != null) {
         temp = temp?.next;
       }
       temp?.next = newlist.head;
@@ -140,6 +138,38 @@ class DoublyLinkedList {
       temp = temp.next;
     }
   }
+
+  //! insert at index
+  void insertAt(int index, int data) {
+    Node newNode = Node(data);
+    if (index == 0) {
+      // Inserting at the head
+      newNode.next = head;
+      if (head != null) {
+        head!.prev = newNode;
+      }
+      head = newNode;
+      return;
+    }
+
+    Node? temp = head;
+    for (int i = 0; i < index - 1; i++) {
+      temp = temp?.next;
+      if (temp == null) {
+        print("Index out of bounds");
+        return;
+      }
+    }
+
+    // Now `temp` is the node before the insert position
+    newNode.next = temp!.next;
+    newNode.prev = temp;
+    temp.next = newNode;
+
+    if (newNode.next != null) {
+      newNode.next!.prev = newNode;
+    }
+  }
 }
 
 void main() {
@@ -148,11 +178,7 @@ void main() {
   linkedList.addNode(100);
   linkedList.addNode(200);
   linkedList.addNode(300);
+  linkedList.insertAt(1, 10000000);
   print('Linked list: ');
   linkedList.displayNode();
-
-  linkedList.insertAfterNode(300, 10);
-  print("List after inserting");
-  linkedList.displayNode();
-
 }

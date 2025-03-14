@@ -30,7 +30,7 @@ List<int> merge(List<int> left, List<int> right) {
       rightIndex++;
     }
   }
-
+  
   // Add any remaining elements from the left sublist
   result.addAll(left.sublist(leftIndex));
 

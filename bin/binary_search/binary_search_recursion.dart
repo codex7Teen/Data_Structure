@@ -1,5 +1,3 @@
-
-
 void main() {
   //  the binary search function
   print(searchBinary([2, 3, 4, 5], 5)); // Output: 5

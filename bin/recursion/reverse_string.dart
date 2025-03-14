@@ -1,5 +1,5 @@
 void main(){
-  print(reverseString('dennis'));
+  print(reverseString('car'));
 }
 reverseString(String word){
   //to do actual reversing
@@ -7,7 +7,7 @@ reverseString(String word){
 }
 
 helper1(String word) {
-  //check cheyu 1 0 athil korava aanengil aa reverse cheyandelo
+  //check cheyu 1,0 athil korav aanengil reverse cheyandelo
   if(word.length  <=1){
     return word;
   } else {
