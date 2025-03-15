@@ -27,7 +27,7 @@ class MinHeap extends Heap {
   }
 
   void insert(int value) {
-    heap.add(value); 
+    heap.add(value);
     heapifyUp(heap.length - 1);
   }
 
