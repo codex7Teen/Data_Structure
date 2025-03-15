@@ -1,12 +1,12 @@
 class Heap {
   List<int> heap = [];
 
-  int parent(int index) => (index - 1) ~/ 2;
-  int leftChild(int index) => (2 * index) + 1;
-  int rightChild(int index) => (2 * index) + 2;
+  int parent(int index)=> (index - 1) ~/2;
+  int leftChild(int index) => (2*index) + 1;
+  int rightChild(int index) => (2*index) + 2;
 
   void swap(int i, int j) {
-    int temp = heap[i];
+    int temp = heap [i];
     heap[i] = heap[j];
     heap[j] = temp;
   }
@@ -14,47 +14,68 @@ class Heap {
   void printHeap() {
     print(heap);
   }
+
 }
 
 class MinHeap extends Heap {
   void buildHeap(List<int> list) {
     heap = list;
-    for (var i = parent(list.length - 1); i >= 0; i--) {
+    for(var i= parent(heap.length - 1);i>=0;i--) {
       heapifyDown(i);
     }
   }
+
 
   void heapifyDown(int index) {
     int smallest = index;
     int left = leftChild(index);
     int right = rightChild(index);
 
-    if (left < heap.length && heap[left] < heap[smallest]) {
+    while(left < heap.length && heap[left] < heap[smallest]) {
       smallest = left;
     }
 
-    if (right < heap.length && heap[right] < heap[smallest]) {
+    while(right < heap.length && heap[right] < heap[smallest]) {
       smallest = right;
     }
 
-    if (smallest != index) {
+    if(index != smallest) {
       swap(index, smallest);
       heapifyDown(smallest);
     }
   }
 
+  void insertIntoHeap(int data) {
+    heap.add(data);
+    heapifyUp(heap.length - 1);
+  }
+
   void heapifyUp(int index) {
-    while(index > 0 && heap[parent(index)] > heap[index]) {
+    while(index > 0 && heap[index] < heap[parent(index)]) {
       swap(index, parent(index));
       index = parent(index);
     }
   }
+
+  void deleteFromHeap() {
+    if(heap.isEmpty) {
+      return;
+    }
+
+    heap[0] = heap.removeLast();
+    heapifyDown(0);
+  }
+
 }
 
 void main() {
-  MinHeap heap = MinHeap();
+  MinHeap minHeap = MinHeap();
 
-  heap.buildHeap([7, 10, 3, 6, 1, 5]);
+  minHeap.buildHeap([4,6,2,8,3,9]);
 
-  heap.printHeap();
+  minHeap.insertIntoHeap(1);
+
+  minHeap.deleteFromHeap();
+
+  minHeap.printHeap();
 }

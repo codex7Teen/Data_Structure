@@ -27,7 +27,7 @@ class MinHeap extends Heap {
   }
 
   void insert(int value) {
-    heap.add(value);
+    heap.add(value); 
     heapifyUp(heap.length - 1);
   }
 
@@ -35,11 +35,11 @@ class MinHeap extends Heap {
     if (heap.isEmpty) {
       throw Exception('Heap is empty');
     }
-     // Replace the root with the last element
-  heap[0] = heap.removeLast();
-  
-  // Restore the heap property
-  heapifyDown(0);
+    // Replace the root with the last element
+    heap[0] = heap.removeLast();
+
+    // Restore the heap property
+    heapifyDown(0);
   }
 
   void heapifyUp(int index) {
@@ -76,5 +76,4 @@ void main() {
 
   minHeap.remove(); // Removes and returns the smallest element (0)
   minHeap.printHeap(); // Heap after removal
-
 }
