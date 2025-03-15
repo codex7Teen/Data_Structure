@@ -70,7 +70,7 @@ class BinarySearchTree {
         parentNode = currentNode;
         currentNode = currentNode.right;
       } else {
-        //*if value found
+        // *if value found
         // removes if both left and right of a node is present
         if (currentNode.left != null && currentNode.right != null) {
           currentNode.data = getMinValueHelper(currentNode.right);
