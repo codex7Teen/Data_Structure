@@ -200,10 +200,10 @@ void main() {
   BinarySearchTree tree = BinarySearchTree();
 
   tree.insertNode(10);
-  tree.insertNode(5);
-  tree.insertNode(15);
+  tree.insertNode(20);
+  tree.insertNode(30);
 
-  print(tree.checkContains(100));
+  tree.inOrder();
 
   // tree.inOrder();
   // print('\n');

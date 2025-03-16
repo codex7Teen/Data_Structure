@@ -1,72 +1,176 @@
-// hatch table
+// binary search tree (bst)
 
-class Entry<K, V> {
-  K key;
-  V value;
-  Entry({required this.key, required this.value});
+class Node {
+  int data;
+  Node? left;
+  Node? right;
+  Node(this.data);
 }
 
-class HatchTable<K, V> {
-  int length;
+class Bst {
+  Node? root;
 
-  late List<List<Entry<K, V>>> bucket = [];
+  // add
+  void add(int data) {
+    Node newNode = Node(data);
+    Node? currentNode = root;
 
-  HatchTable(this.length) {
-    bucket = List.generate(length, (index) => []);
-  }
-
-  int hash(K key) {
-    return key.hashCode % length;
-  }
-
-  // add to hashtable
-  void add(K key, V value) {
-    int index = hash(key);
-    Entry<K, V> entry = Entry(key: key, value: value);
-
-    for(var existingEntry in bucket[index]) {
-      if(existingEntry.key == key) {
-        existingEntry.value = value;
-        break;
-      } 
+    if (currentNode == null) {
+      root = newNode;
+      return;
     }
-    bucket[index].add(entry);
-  }
 
-  // display hashtable
-  void display() {
-    for(var i=0;i<bucket.length;i++) {
-      print('BUCKET: $i');
-      for(var entry in bucket[i]) {
-        print('entry: ${entry.key}, value: ${entry.value}');
+    while (true) {
+      if (newNode.data < currentNode!.data) {
+        if (currentNode.left == null) {
+          currentNode.left = newNode;
+          break;
+        } else {
+          currentNode = currentNode.left;
+        }
+      } else {
+        if (currentNode.right == null) {
+          currentNode.right = newNode;
+          break;
+        } else {
+          currentNode = currentNode.right;
+        }
       }
     }
   }
 
-  // delete from hashtable
+  // check contains
+  bool checkContains(int data) {
+    Node? currentNode = root;
 
-  void delete(K key) {
-    int index = hash(key);
+    while (currentNode != null) {
+      if (data < currentNode.data) {
+        currentNode = currentNode.left;
+      } else if (data > currentNode.data) {
+        currentNode = currentNode.right;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
 
-    bucket[index].removeWhere((entry) => entry.key == key);
+  // inorder traversal
+  void inorder() {
+    return inorderHelper(root);
+  }
+
+  void inorderHelper(Node? node) {
+    if (node != null) {
+      inorderHelper(node.left);
+      print(node.data);
+      inorderHelper(node.right);
+    }
+  }
+
+  void preorder() {
+    return preorderHelper(root);
+  }
+
+  void preorderHelper(Node? node) {
+    if (node != null) {
+      print(node.data);
+      preorderHelper(node.left);
+      preorderHelper(node.right);
+    }
+  }
+
+  void postOrder() {
+    return postOrderHelper(root);
+  }
+
+  void postOrderHelper(Node? node) {
+    if (node != null) {
+      postOrderHelper(node.left);
+      postOrderHelper(node.right);
+      print(node.data);
+    }
+  }
+
+  // find leaves in a tree
+  void findLeaves() {
+    return findLeavesHelper(root);
+  }
+
+  void findLeavesHelper(Node? node) {
+    if (node != null) {
+      if (node.left == null && node.right == null) {
+        print(node.data);
+      }
+      findLeavesHelper(node.left);
+      findLeavesHelper(node.right);
+    }
+  }
+
+  // delete a node from bst
+  void deleteNode(int data) {
+    return deleteNodeHelper(data, root, null);
+  }
+
+  void deleteNodeHelper(int data, Node? currentNode, Node? parentNode) {
+    while (currentNode != null) {
+      if (data < currentNode.data) {
+        parentNode = currentNode;
+        currentNode = currentNode.left;
+      } else if (data > currentNode.data) {
+        parentNode = currentNode;
+        currentNode = currentNode.right;
+      } else {
+        // found
+        if (currentNode.left != null && currentNode.right != null) {
+          currentNode.data = findSmallest(currentNode);
+          deleteNodeHelper(currentNode.data, currentNode.right, currentNode);
+        } else {
+          // when root is the one to be deleted
+          if(parentNode == null) {
+            if(currentNode.right == null) {
+              root = currentNode.left;
+            } else {
+              root = currentNode.right;
+            }
+          } else {
+            if(parentNode.left == currentNode) {
+              if(currentNode.right == null) {
+                parentNode.left = currentNode.left;
+              } else {
+                parentNode.left = currentNode.right;
+              }
+            } else {
+              if(currentNode.right == null) {
+                parentNode.right = currentNode.left;
+              } else {
+                parentNode.right = currentNode.right;
+              }
+            }
+          }
+        }
+        break;
+      }
+    }
+  }
+
+  int findSmallest(Node? currentNode) {
+    if (currentNode?.left == null) {
+      return currentNode!.data;
+    } else {
+      return findSmallest(currentNode?.left);
+    }
   }
 }
 
 void main() {
-  HatchTable table = HatchTable(6);
+  Bst bst = Bst();
 
-  
-  // Adding key-value pairs to the hash table
-  table.add(4, 2);
-    table.add(3, 20);
-      table.add(2, 20);
-        table.add(7, 20);
-          table.add(10, 20);
-  table.add(6, 20);
+  bst.add(10);
+  bst.add(5);
+  bst.add(30);
 
-  // remove entry from hash table
-  table.delete(6);
+  bst.deleteNode(5);
 
-  // Displaying the contents of the hash table
-  table.display();
+  print(bst.checkContains(5));
 }
