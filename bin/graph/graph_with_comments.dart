@@ -88,14 +88,14 @@ class Graph {
 }
 
 void main() {
-  Graph grap = Graph();
-  grap.insert(10, 14);
-  grap.insert(10, 15);
-  grap.insert(19, 10);
-  grap.insert(10, 17);
-  grap.insert(10, 18);
-  grap.insert(17, 19);
-  grap.insert(17, 20);
-  // grap.dfs(10);
-  grap.bfs(10);
+  Graph graph = Graph();
+  graph.insert(10, 14);
+  graph.insert(10, 15);
+  graph.insert(19, 10);
+  graph.insert(10, 17);
+  graph.insert(10, 18);
+  graph.insert(17, 19);
+  graph.insert(17, 20);
+  // graph.dfs(10);
+  graph.bfs(10);
 }
